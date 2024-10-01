@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Our Site</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb); 
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            animation: fadeIn 2s ease-out;
+            background-image: url('https://w.wallhaven.cc/full/x6/wallhaven-x6me7l.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+    padding: 40px 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.692); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    animation: slideIn 1s ease-out;
+    max-width: 90%;
+    width: 500px;
+    color: #333;
+}
+
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: #34495e;
+            animation: fadeInUp 1.5s ease-out 0.5s;
+        }
+
+        .login-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            color: #fff;
+            background-color: #3498db;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeInUp 1.5s ease-out 1s;
+        }
+
+        .login-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Our Amazing App!</h1>
+        <p>Your journey starts here. Please log in to continue.</p>
+        <a href="/login" class="login-btn">Login</a>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bgImageUrl = 'https://w.wallhaven.cc/full/x6/wallhaven-x6me7l.jpg';
+            document.body.style.backgroundImage = `url('${bgImageUrl}')`;
+        });
+    </script>
+</body>
+</html>

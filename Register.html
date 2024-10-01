@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Testing - Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .register-container {
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+    }
+
+    .register-container h1 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .input-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .input-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    .register-btn {
+        width: 100%;
+        padding: 10px;
+        background: #ff7e5f;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .register-btn:hover {
+        background: #feb47b;
+    }
+</style>
+<body>
+    <div class="register-container">
+        <h1>Register</h1>
+        <form id="registerForm" action="/register" method="post">
+            <div class="input-group">
+                <label for="new-username">Username</label>
+                <input type="text" id="new-username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="new-password">Password</label>
+                <input type="password" id="new-password" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="register-btn">Register</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Layout</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 90vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .user-icon {
+            background-color: #e74c3c;
+            border-radius: 50%;
+            padding: 10px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .central-icon-symbol {
+            font-size: 80px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .option {
+            background-color: #333333;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 150px;
+            max-width: 200px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            color: #c0c0c0;
+            text-align: left;
+        }
+
+        .option:hover {
+            background-color: #444444;
+        }
+
+        .option span {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .query-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333333;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .attachment-icon {
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .send-button {
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .query-bar input {
+            flex-grow: 1;
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+            padding: 5px;
+            min-width: 0;
+        }
+
+        .query-bar input::placeholder {
+            color: #c0c0c0;
+        }
+        
+        #chatSection {
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-y: auto;
+    max-height: 60vh;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ai-message {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    align-self: flex-start;
+    max-width: 60%;
+    text-align: left;
+    white-space: pre-wrap;
+    margin-bottom: 10px;
+}
+
+.user-message {
+    background-color: #444; 
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    align-self: flex-end;
+    max-width: 60%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column; 
+    text-align: right;
+}
+
+.user-message strong {
+    font-weight: bold; 
+}
+
+.user-message span {
+    margin-top: 5px;
+    display: block;
+}
+
+
+#chatSection div strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#typing-indicator em {
+    color: #c0c0c0;
+    font-style: italic;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo"> 
+                <span>EduAssist</span>
+            </div>
+            <button id="userIcon" class="user-icon">KH</button>
+        </div>
+        <div class="content">
+            <div class="central-icon" id="centralIcon">
+                <span class="central-icon-symbol">&#9881;</span>
+            </div>
+            <div class="options" id="options">
+                <button class="option">
+                    <span>Create an illustration for a bakery</span>
+                </button>
+                <button class="option">
+                    <span>What to do with kids' art</span>
+                </button>
+                <button class="option">
+                    <span>Create a chart based on my data</span>
+                </button>
+                <button class="option">
+                    <span>Make me a personal webpage</span>
+                </button>
+            </div>
+            <div class="chat-section" id="chatSection" style="display: none; flex-direction: column; align-items: flex-start; overflow-y: auto; flex-grow: 1;">
+               
+            </div>
+        </div>
+        <div class="query-bar">
+            <form action="/submit" method="post" style="display: flex; align-items: center; width: 100%;">
+                <button class="attachment-icon">&#128206;</button>
+                <input type="text" name="message" placeholder="Message EduAssist">
+                <button type="submit" class="send-button">&#9658;</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    document.querySelector('form').addEventListener('submit', async function(event) {
+    event.preventDefault();  
+
+    const messageInput = document.querySelector('input[name="message"]');
+    const message = messageInput.value.trim();
+
+    if (!message) return;  
+
+  
+    addMessageToChat("User", message);
+
+   
+    messageInput.value = "";
+
+    
+    addTypingIndicator();
+
+    
+    try {
+        const response = await fetch('/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({ message: message })
+        });
+
+        const data = await response.json();
+
+        removeTypingIndicator();
+
+        simulateTyping("EduAssist", data.reply);
+
+    } catch (error) {
+        console.error("Error communicating with the API:", error);
+        addMessageToChat("Error", "Failed to get a response from the server.");
+        removeTypingIndicator();
+    }
+});
+
+function addMessageToChat(sender, message) {
+    const chatSection = document.getElementById('chatSection');
+    const messageElement = document.createElement('div');
+
+    messageElement.classList.add(sender === "User" ? "user-message" : "ai-message");
+
+    const nameElement = document.createElement('strong');
+    nameElement.textContent = `${sender}`; 
+
+    const messageTextElement = document.createElement('span');
+    messageTextElement.textContent = message;
+
+    messageElement.appendChild(nameElement);
+    messageElement.appendChild(messageTextElement);
+
+    chatSection.appendChild(messageElement);
+
+    chatSection.scrollTop = chatSection.scrollHeight;
+
+    document.getElementById('options').style.display = 'none';
+    document.getElementById('centralIcon').style.display = 'none';
+
+    chatSection.style.display = 'flex';
+}
+
+
+
+function addTypingIndicator() {
+    const chatSection = document.getElementById('chatSection');
+    const typingElement = document.createElement('div');
+    typingElement.id = "typing-indicator";
+    typingElement.classList.add('ai-message');
+    typingElement.innerHTML = `<strong>EduAssist:</strong> <em>typing...</em>`;
+
+    chatSection.appendChild(typingElement);
+    chatSection.scrollTop = chatSection.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const typingElement = document.getElementById('typing-indicator');
+    if (typingElement) {
+        typingElement.remove();
+    }
+}
+let autoScroll = true; 
+function simulateTyping(sender, message) {
+    const chatSection = document.getElementById('chatSection');
+    
+    const uniqueId = `typing-text-${Date.now()}`;
+
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('ai-message');
+    messageElement.innerHTML = `<strong>${sender}:</strong> <span id="${uniqueId}"></span>`;
+    chatSection.appendChild(messageElement);
+
+    let currentIndex = 0;
+
+    function scrollIfNeeded() {
+        if (autoScroll) {
+            chatSection.scrollTop = chatSection.scrollHeight;
+        }
+    }
+
+    function typeCharacter() {
+        if (currentIndex < message.length) {
+            const typingText = document.getElementById(uniqueId);
+            typingText.innerHTML += message.charAt(currentIndex);
+            currentIndex++;
+
+            scrollIfNeeded();  
+            setTimeout(typeCharacter, 15);
+        }
+    }
+
+    typeCharacter();
+}
+
+document.getElementById('chatSection').addEventListener('scroll', function() {
+    const chatSection = document.getElementById('chatSection');
+    
+    const isNearBottom = chatSection.scrollHeight - chatSection.scrollTop <= chatSection.clientHeight + 50;
+
+    if (isNearBottom) {
+        autoScroll = true;  
+    } else {
+        autoScroll = false;  
+    }
+});
+function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        window.onload = function() {
+            const username = getQueryParam('username');
+            if (username) {
+                const firstLetter = username.charAt(0).toUpperCase();
+                document.getElementById('userIcon').textContent = firstLetter;
+            }
+        };
+
+</script>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+            background-color: #2b2b2b;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 20px;
+            background-color: #333333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .user-icon {
+            background-color: #e74c3c;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .chat-area {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .chat-bubble {
+            max-width: 70%;
+            padding: 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-bubble.user {
+            background-color: #444444;
+            margin-left: auto;
+        }
+
+        .chat-bubble.api {
+            background-color: #3b5998;
+            margin-right: auto;
+        }
+
+        .query-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #333333;
+        }
+
+        .attachment-icon, .send-button {
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .query-bar input {
+            flex-grow: 1;
+            background-color: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 16px;
+            outline: none;
+            margin: 0 10px;
+        }
+
+        .query-bar input::placeholder {
+            color: #c0c0c0;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">ChatGPT</div>
+            <div class="user-icon">KH</div>
+        </div>
+        <div class="chat-area" id="chat-area">
+        </div>
+        <div class="query-bar">
+            <form id="chat-form">
+                <button class="attachment-icon">&#128206;</button>
+                <input type="text" id="user-input" placeholder="Message ChatGPT" required>
+                <button type="submit" class="send-button">&#9658;</button>
+            </form>
+        </div>
+    </div>
+
+    <script>document.getElementById('chat-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        const userInput = document.getElementById('user-input');
+        const userMessage = userInput.value;
+    
+        const chatArea = document.getElementById('chat-area');
+        const userBubble = document.createElement('div');
+        userBubble.classList.add('chat-bubble', 'user');
+        userBubble.textContent = userMessage;
+        chatArea.appendChild(userBubble);
+    
+        chatArea.scrollTop = chatArea.scrollHeight;
+    
+        userInput.value = '';
+    
+        fetch('/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({ message: userMessage }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            const apiBubble = document.createElement('div');
+            apiBubble.classList.add('chat-bubble', 'api');
+            apiBubble.textContent = data.response; 
+            chatArea.appendChild(apiBubble);
+    
+            chatArea.scrollTop = chatArea.scrollHeight;
+        })
+        .catch(error => console.error('Error:', error));
+    });
+    
+    </script>
+</body>
+</html>
